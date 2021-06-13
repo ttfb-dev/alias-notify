@@ -1,0 +1,18 @@
+version: "3.6"
+
+networks:
+  default:
+    external:
+      name: ttfb
+
+services:
+  notify-server-nodejs:
+    restart: "no"
+    networks:
+      default:
+        aliases:
+          - notify.lc
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.notify.rule=Host(`notify.lc`)
+      - traefik.http.routers.notify.entrypoints=web
